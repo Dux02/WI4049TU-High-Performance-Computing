@@ -1,0 +1,39 @@
+#ifndef HEADER_H
+#define HEADER_H
+
+// Struct to hold all simulation parameters
+typedef struct
+{
+    int nx;        // Grid points in X (including boundaries)
+    int ny;        // Grid points in Y (including boundaries)
+    double dx;     // grid spacing in x-direction (x_{i+1} - x_{i})
+    double dy;     // grid spacing in y-direction (y_{j+1} - y_{j})
+    double cx;     // Convection velocity along X
+    double cy;     // Convection velocity along Y
+    double tol;    // Convergence tolerance
+    int max_iters; // Maximum iterations allowed
+} Params;
+
+// Struct to hold 2D grid dimensions and data
+typedef struct Grid
+{
+    int nx;       // Grid points in X (including boundaries)
+    int ny;       // Grid points in Y (including boundaries)
+    double **val; // 2D array of values (val[j][i])
+} Grid;
+
+// Grid memory and I/O utility functions (util.c)
+Grid *allocate_grid(int nx, int ny);
+void free_grid(Grid *grid);
+void write_pgm(const char *filename, Grid *grid);
+
+// Solver, boundary, and diagnostic functions (pde_solver.c)
+void parse_args(int argc, char **argv, Params *p);
+void error_and_exit(const char *msg);
+void init_sol(Grid *u);
+void set_boundaries(Grid *u);
+void set_rhs(Grid *f, Params *p);
+void solve_gauss_seidel(Grid *u, Grid *f, const Params *p, int *out_iters, double *out_diff);
+void print_canaries(Grid *u, Grid *f, const Params *p);
+
+#endif // HEADER_H
