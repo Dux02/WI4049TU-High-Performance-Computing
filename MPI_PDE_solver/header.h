@@ -1,5 +1,7 @@
 #ifndef HEADER_H
 #define HEADER_H
+#include <mpi.h>
+
 
 // Struct to hold all simulation parameters
 typedef struct
@@ -11,12 +13,23 @@ typedef struct
     double cx;     // Convection velocity along X
     double cy;     // Convection velocity along Y
     double tol;    // Convergence tolerance
+    double beta;   // SOR relaxation parameter
     int max_iters; // Maximum iterations allowed
 } Params;
 
 // Struct to hold 2D grid dimensions and data
 typedef struct Grid
 {
+    int local_cols; // Number of owned interior columns
+    int x_start;    // Global index of the first owned column
+
+    MPI_Comm comm; //Cartesian commmunicator MPI
+    int below, above;
+    int left, right;
+    int local_rows; // Number of owned interior rows
+    int y_start; // Global index of the first owned row
+    int rank; // proces rank
+    int size; // total number of processes
     int nx;       // Grid points in X (including boundaries)
     int ny;       // Grid points in Y (including boundaries)
     double **val; // 2D array of values (val[j][i])
@@ -24,6 +37,7 @@ typedef struct Grid
 
 // Grid memory and I/O utility functions (util.c)
 Grid *allocate_grid(int nx, int ny);
+Grid *gather_grid(Grid *local, const Params *p);
 void free_grid(Grid *grid);
 void write_pgm(const char *filename, Grid *grid);
 
@@ -36,4 +50,7 @@ void set_rhs(Grid *f, Params *p);
 void solve_gauss_seidel(Grid *u, Grid *f, const Params *p, int *out_iters, double *out_diff);
 void print_canaries(Grid *u, Grid *f, const Params *p);
 
+// Red black ordering
+void exchange_colour(Grid *u, int colour, MPI_Datatype row_colour);
+void exchange_halo(Grid *u, MPI_Datatype column_type);
 #endif // HEADER_H
