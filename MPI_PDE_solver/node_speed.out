@@ -1,0 +1,55 @@
+This is node  cmp279.ethernet.delftblue
+-------------------------------------------------------------
+Benchmark the speed of computing y = a*x + y, x, y in R^n    
+-------------------------------------------------------------
+1. Core Rmax (data resides in L1 cache
+-------------------------------------------------------------
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		23871.78
+2. Core Bandwidth (data resides in RAM)
+-------------------------------------------------------------
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		2248.35
+MByte/s:		26980.24
+2. Socket Scaling (data resides in RAM)
+-------------------------------------------------------------
+Cores = 1
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		2248.12
+MByte/s:		26977.40
+Cores = 2
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		4139.38
+MByte/s:		49672.56
+Cores = 4
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		6494.37
+MByte/s:		77932.48
+Cores = 8
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		8142.61
+MByte/s:		97711.37
+Cores = 12
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		8547.82
+MByte/s:		102573.89
+Cores = 16
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		8569.46
+MByte/s:		102833.47
+Cores = 20
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		8463.85
+MByte/s:		101566.19
+Cores = 24
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		8332.39
+MByte/s:		99988.62
+Cores = 28
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		5785.88
+MByte/s:		69430.55
+Cores = 32
+Running without Marker API. Activate Marker API with -m on commandline.
+MFlops/s:		3921.86
+MByte/s:		47062.31

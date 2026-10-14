@@ -25,7 +25,6 @@ int main(int argc, char **argv)
     {
         error_and_exit("SOR requires 1 < beta < 2.");
     }
-    
     int dims[2] = {0, 0};
     MPI_Dims_create(size, 2, dims);
 
@@ -143,42 +142,61 @@ int main(int argc, char **argv)
     int iters = 0;
     double final_diff = 0.0;
 
+    MPI_Barrier(cart_comm);
+
     double t0 = MPI_Wtime();
     solve_gauss_seidel(u, f, &p, &iters, &final_diff);
-    double t1 = MPI_Wtime();
-    double elapsed = t1 - t0;
+    double local_elapsed = MPI_Wtime() - t0;
 
-    printf("\n--- Solver Results ---\n");
-    printf("Status: %s\n", (iters < p.max_iters) ? "CONVERGED" : "MAX ITERS REACHED");
-    printf("Iterations: %d\n", iters);
-    printf("Final Change: %.4e\n", final_diff);
-    printf("Execution Time: %.6f seconds\n", elapsed);
+    double elapsed;
+    MPI_Reduce(&local_elapsed, &elapsed, 1,
+               MPI_DOUBLE, MPI_MAX, 0, cart_comm);
 
-
-    // Verification and Output
-    print_canaries(u, f, &p);
-
-    Grid *global_u = gather_grid(u, &p);
-    Grid *global_f = gather_grid(f, &p);
-
-    if (cart_rank==0)
+    if (cart_rank == 0)
     {
-        global_f->y_start =1;
-        set_rhs(global_f, &p);
+        double points = (double)(p.nx - 2) * (p.ny - 2);
+        double updates = points * iters;
+        double gflops = 16.0 * updates / elapsed / 1e9;
 
-        printf("SOR beta: %.2f\n", p.beta);
-        write_pgm("rhs.pgm", global_f);
-        write_pgm("solution.pgm", global_u);
-        printf("Output images saved to 'rhs.pgm' and 'solutions.pgm'.\n");
+        printf("\n--- Solver Results ---\n");
+        printf("Status: %s\n",
+               final_diff <= p.tol ? "CONVERGED" : "MAX ITERS REACHED");
+        printf("Iterations: %d\n", iters);
+        printf("Final Change: %.10e\n", final_diff);
+        printf("Execution Time: %.9f seconds\n", elapsed);
+        printf("Performance: %.6f GFLOP/s\n", gflops);
 
-        free_grid(global_u);
-        free_grid(global_f);
+        printf("BENCH,%d,%d,%d,%.6f,%d,%.9f,%.6f\n",
+               size, p.nx, p.ny, p.beta,
+               iters, elapsed, gflops);
     }
+    if (!p.no_output)
+    {
+        // Verification and Output
+        print_canaries(u, f, &p);
 
+        Grid *global_u = gather_grid(u, &p);
+        Grid *global_f = gather_grid(f, &p);
+
+        if (cart_rank==0)
+        {
+            global_f->y_start =1;
+            global_f->x_start =1;
+            set_rhs(global_f, &p);
+
+            printf("SOR beta: %.2f\n", p.beta);
+            write_pgm("rhs.pgm", global_f);
+            write_pgm("solution.pgm", global_u);
+            printf("Output images saved to 'rhs.pgm' and 'solutions.pgm'.\n");
+
+            free_grid(global_u);
+            free_grid(global_f);
+        }
+
+    } 
     // Cleanup
     free_grid(u);
     free_grid(f);
-
     MPI_Comm_free(&cart_comm);
     MPI_Finalize();
     return 0;
@@ -188,7 +206,7 @@ int main(int argc, char **argv)
 void parse_args(int argc, char **argv, Params *p)
 {
     int opt;
-    while ((opt = getopt(argc, argv, "x:y:c:d:r:t:b:h")) != -1)
+    while ((opt = getopt(argc, argv, "x:y:c:d:r:t:b:qh")) != -1)
     {
         switch (opt)
         {
@@ -210,11 +228,22 @@ void parse_args(int argc, char **argv, Params *p)
         case 'b':
             p->beta= atof(optarg);
             break;
+        case 'r':
+            p->max_iters = atoi(optarg);
+            break;
+        case 'q':
+            p->no_output = 1;
+            break;
         case 'h':
         default:
-            printf("Usage: %s [-x nx] [-y ny] [-c cx] [-d cy] [-t tolerance] [-b beta]\n", argv[0]);
+            printf("Usage: %s [-x nx] [-y ny] [-c cx] [-d cy] [-t tolerance] [-r max_iters] [-q no_output] [-b beta]\n", argv[0]);
             exit(opt == 'h' ? EXIT_SUCCESS : EXIT_FAILURE);
         }
+    }
+
+    if (p->max_iters < 1)
+    {
+        error_and_exit("Maximum iteration count must be at least 1.");  
     }
     p->dx = 1.0 / (double)(p->nx);     // note the periodic BC
     p->dy = 1.0 / (double)(p->ny - 1); // for ny=2, only the Dirichlet points exist
@@ -313,6 +342,10 @@ void solve_gauss_seidel(Grid *u, Grid *f, const Params *p, int *out_iters, doubl
 
     double a_P = 2.0 * idx2 + 2.0 * idy2 + (cx_plus - cx_minus) / dx + (cy_plus - cy_minus) / dy;
 
+    double a_W = idx2 + cx_plus / dx;
+    double a_E = idx2 - cx_minus / dx;
+    double a_S = idy2 + cy_plus / dy;
+    double a_N = idy2 - cy_minus / dy;
     // Compute initial norm of RHS ||F||_2 for relative residual check
     double f_norm_sq = 0.0;
     for (int j = 1; j < u->ny - 1; j++)
@@ -375,10 +408,6 @@ void solve_gauss_seidel(Grid *u, Grid *f, const Params *p, int *out_iters, doubl
                             continue;
                         }
 
-                        double a_W = idx2 + cx_plus / dx;
-                        double a_E = idx2 - cx_minus / dx;
-                        double a_S = idy2 + cy_plus / dy;
-                        double a_N = idy2 - cy_minus / dy;
                         double rhs_val =
                             f->val[j][i]
                             + a_W * u->val[j][i - 1]

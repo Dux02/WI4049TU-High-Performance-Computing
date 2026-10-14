@@ -15,6 +15,7 @@ typedef struct
     double tol;    // Convergence tolerance
     double beta;   // SOR relaxation parameter
     int max_iters; // Maximum iterations allowed
+    int no_output; // Skip diagnostics gather and images for benchmarks
 } Params;
 
 // Struct to hold 2D grid dimensions and data
