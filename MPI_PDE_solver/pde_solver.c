@@ -337,39 +337,66 @@ void solve_gauss_seidel(Grid *u, Grid *f, const Params *p, int *out_iters, doubl
     do
     {
         double res_sq = 0.0;
-
+            
+        double global_res_sq;
         for (int colour = 0; colour < 2; colour++)
         {
-            for (int j = 1; j < u->ny - 1; j++)
+            MPI_Request requests[8];
+            start_halo_exchange(u, column_type, requests);
+
+            // Phase 0: interior. Phase 1: block edges.
+            for (int phase = 0; phase < 2; phase++)
             {
-                int global_j = u->y_start + j - 1;
-
-                for (int i = 1; i < u->nx - 1; i++)
+                if (phase == 1)
                 {
-                    int global_i = u->x_start + i - 1;
-                    if ((global_i + global_j) % 2 != colour)
+                    MPI_Waitall(8, requests, MPI_STATUSES_IGNORE);
+                }
+
+                for (int j = 1; j < u->ny - 1; j++)
+                {
+                    int global_j = u->y_start + j - 1;
+
+                    for (int i = 1; i < u->nx - 1; i++)
                     {
-                        continue;
+                        int global_i = u->x_start + i - 1;
+
+                        if ((global_i + global_j) % 2 != colour)
+                        {
+                            continue;
+                        }
+
+                        int on_edge =
+                            i == 1 || i == u->nx - 2 ||
+                            j == 1 || j == u->ny - 2;
+
+                        if ((phase == 0 && on_edge) ||
+                            (phase == 1 && !on_edge))
+                        {
+                            continue;
+                        }
+
+                        double a_W = idx2 + cx_plus / dx;
+                        double a_E = idx2 - cx_minus / dx;
+                        double a_S = idy2 + cy_plus / dy;
+                        double a_N = idy2 - cy_minus / dy;
+                        double rhs_val =
+                            f->val[j][i]
+                            + a_W * u->val[j][i - 1]
+                            + a_E * u->val[j][i + 1]
+                            + a_S * u->val[j - 1][i]
+                            + a_N * u->val[j + 1][i];
+
+                        double u_old = u->val[j][i];
+                        double res = rhs_val - a_P * u_old;
+                        res_sq += res * res;
+
+                        double u_gs = rhs_val / a_P;
+                        u->val[j][i] =
+                            u_old + p->beta * (u_gs - u_old);
                     }
-                    double rhs_val =
-                        f->val[j][i]
-                        + (idx2 + cx_plus / dx) * u->val[j][i - 1]
-                        + (idx2 - cx_minus / dx) * u->val[j][i + 1]
-                        + (idy2 + cy_plus / dy) * u->val[j - 1][i]
-                        + (idy2 - cy_minus / dy) * u->val[j + 1][i];
-
-                    double res = rhs_val - a_P * u->val[j][i];
-                    res_sq += res * res;
-
-                    double u_old = u->val[j][i];
-                    double u_gs = rhs_val / a_P;
-
-                    u->val[j][i] = u_old + p->beta * (u_gs - u_old);
                 }
             }
-            exchange_halo(u, column_type);
         }
-        double global_res_sq;
         MPI_Allreduce(&res_sq, &global_res_sq, 1, MPI_DOUBLE, MPI_SUM, u->comm);
 
         rel_res = sqrt(global_res_sq) / f_norm;
@@ -377,6 +404,7 @@ void solve_gauss_seidel(Grid *u, Grid *f, const Params *p, int *out_iters, doubl
 
     } while (rel_res > p->tol && iter < p->max_iters);
     
+    exchange_halo(u, column_type);
     MPI_Type_free(&column_type);
     *out_iters = iter;
     *out_diff = rel_res;
@@ -650,4 +678,40 @@ void exchange_halo(Grid *u, MPI_Datatype column_type)
                 &u->val[1][0],
                 1, column_type, u->left, 13,
                 u->comm, MPI_STATUS_IGNORE);
+}
+
+void start_halo_exchange(Grid *u, MPI_Datatype column_type, MPI_Request requests[8])
+{
+    // Post receiv first
+    MPI_Irecv(&u->val[u->ny-1][1],
+               u->local_cols, MPI_DOUBLE, u->above, 10,
+               u->comm, &requests[0]);
+    MPI_Irecv(&u->val[0][1],
+              u->local_cols, MPI_DOUBLE, u->below, 11,
+              u->comm, &requests[1]);
+
+    MPI_Irecv(&u->val[1][u->nx - 1],
+              1, column_type, u->right, 12,
+              u->comm, &requests[2]);
+
+    MPI_Irecv(&u->val[1][0],
+              1, column_type, u->left, 13,
+              u->comm, &requests[3]);
+
+    // Send owned edges.
+    MPI_Isend(&u->val[1][1],
+              u->local_cols, MPI_DOUBLE, u->below, 10,
+              u->comm, &requests[4]);
+
+    MPI_Isend(&u->val[u->ny - 2][1],
+              u->local_cols, MPI_DOUBLE, u->above, 11,
+              u->comm, &requests[5]);
+
+    MPI_Isend(&u->val[1][1],
+              1, column_type, u->left, 12,
+              u->comm, &requests[6]);
+
+    MPI_Isend(&u->val[1][u->nx - 2],
+              1, column_type, u->right, 13,
+              u->comm, &requests[7]);
 }

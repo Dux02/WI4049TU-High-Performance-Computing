@@ -1,0 +1,81 @@
+Rank 0: coords=(0,0), x=1..31, y=1..21
+Rank 0: below=-1 above=2 left=1 right=1
+Rank 1: coords=(0,1), x=32..62, y=1..21
+Rank 1: below=-1 above=3 left=0 right=0
+Rank 2: coords=(1,0), x=1..31, y=22..42
+Rank 2: below=0 above=4 left=3 right=3
+Rank 3: coords=(1,1), x=32..62, y=22..42
+Rank 3: below=1 above=5 left=2 right=2
+Rank 4: coords=(2,0), x=1..31, y=43..63
+Rank 5: coords=(2,1), x=32..62, y=43..63
+Rank 5: below=3 above=-1 left=4 right=4
+Rank 4: below=2 above=-1 left=5 right=5
+Sum of ranks: 15 (expected 15)
+=== 2D Convection-Diffusion Solver ===
+=== 2D Convection-Diffusion Solver ===
+=== 2D Convection-Diffusion Solver ===
+Grid: 64 x 65 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-06
+=== 2D Convection-Diffusion Solver ===
+Grid: 64 x 65 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-06
+=== 2D Convection-Diffusion Solver ===
+Grid: 64 x 65 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-06
+Grid: 64 x 65 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-06
+Grid: 64 x 65 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-06
+=== 2D Convection-Diffusion Solver ===
+Rank 1: allocated nx=33 ny=23; first owned point=(32,1)
+Rank 0: allocated nx=33 ny=23; first owned point=(1,1)
+Grid: 64 x 65 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-06
+Rank 2: allocated nx=33 ny=23; first owned point=(1,22)
+Rank 3: allocated nx=33 ny=23; first owned point=(32,22)
+Rank 5: allocated nx=33 ny=23; first owned point=(32,43)
+Rank 4: allocated nx=33 ny=23; first owned point=(1,43)
+
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 1214
+Final Change: 9.9707e-07
+Execution Time: 0.013788 seconds
+
+
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 1214
+Final Change: 9.9707e-07
+Execution Time: 0.013441 seconds
+
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 1214
+Final Change: 9.9707e-07
+Execution Time: 0.013252 seconds
+
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 1214
+Final Change: 9.9707e-07
+Execution Time: 0.013344 seconds
+
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 1214
+Final Change: 9.9707e-07
+Execution Time: 0.013345 seconds
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 1214
+Final Change: 9.9707e-07
+Execution Time: 0.013798 seconds
+
+========================================================================================================================
+                                              CANARY VALIDATION REPORT                                                  
+========================================================================================================================
+Integral Quantity         | Computed Value     | Expected Behavior / Usage                                   
+--------------------------+--------------------+------------------------------------------------------------------------
+Wall Flux Balance         | -2.4545028711e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6049176990e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.8056379879e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9975565365e-01   | H1 semi-norm; converges to continuous value                 
+========================================================================================================================
+
+SOR beta: 1.80
+Output images saved to 'rhs.pgm' and 'solutions.pgm'.

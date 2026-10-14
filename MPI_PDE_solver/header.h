@@ -53,4 +53,5 @@ void print_canaries(Grid *u, Grid *f, const Params *p);
 // Red black ordering
 void exchange_colour(Grid *u, int colour, MPI_Datatype row_colour);
 void exchange_halo(Grid *u, MPI_Datatype column_type);
+void start_halo_exchange(Grid *u, MPI_Datatype column_type, MPI_Request request[8]);
 #endif // HEADER_H

@@ -6,7 +6,8 @@
 #SBATCH --output="node_speed.out"
 #SBATCH --time=00:10:00
 #SBATCH --account="Education-EEMCS-Courses-WI4049TU"
-
+set -e
+set -o pipefail
 
 
 # Likwid is currently not in the software stack or node image, so it's a bit tricky to load:
@@ -29,15 +30,15 @@ echo "-------------------------------------------------------------"
 echo "1. Core Rmax (data resides in L1 cache"
 echo "-------------------------------------------------------------"
 
-likwid-bench -t daxpy_avx_fma -w S0:10kiB:1 2> /dev/null | grep -e "MFlops/s"
+likwid-bench -t daxpy_avx_fma -w S0:10kiB:1 | grep -e "MFlops/s"
 
 echo "2. Core Bandwidth (data resides in RAM)"
 echo "-------------------------------------------------------------"
-likwid-bench -t daxpy_avx_fma -w S0:2GiB:1 2> /dev/null | grep -e "MFlops/s" -e "MByte/s"
+likwid-bench -t daxpy_avx_fma -w S0:2GiB:1 | grep -e "MFlops/s" -e "MByte/s"
 
 echo "2. Socket Scaling (data resides in RAM)"
 echo "-------------------------------------------------------------"
 for P in 1 2 4 8 12 16 20 24 28 32; do
   echo "Cores = $P"
-  likwid-bench -t daxpy_avx_fma -w S0:2GiB:$P 2> /dev/null | grep -e "MFlops/s" -e "MByte/s"
+  likwid-bench -t daxpy_avx_fma -w S0:2GiB:$P | grep -e "MFlops/s" -e "MByte/s"
 done;
