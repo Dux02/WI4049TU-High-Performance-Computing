@@ -192,6 +192,9 @@ void parse_args(int argc, char **argv, Params *p)
     {
         switch (opt)
         {
+        case 'r':
+            p->max_iters = atoi(optarg);
+            break;
         case 'x':
             p->nx = atoi(optarg);
             break;

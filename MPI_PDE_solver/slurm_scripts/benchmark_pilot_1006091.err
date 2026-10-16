@@ -1,0 +1,3 @@
+[2026-10-16T20:21:18.096] error: execve(): /home/dabouwer/WI4049TU-High-Performance-Computing/MPI_PDE_solver/slurm_scripts/./bin/sor_overlap: No such file or directory
+srun: error: cmp299: task 0: Exited with exit code 2
+srun: Terminating StepId=1006091.0

@@ -44,7 +44,7 @@ for grid in "64 65" "66 68"; do
                 cd "$run_dir"
                 srun --mpi=pmi2 --ntasks="$processes" \
                     --cpu-bind=cores --time=00:01:00 \
-                    "$root/bin/$variant" "${args[@]}" > run.out
+                    "$root/bin_bench/$variant" "${args[@]}" > run.out
             )
 
             grep -E \
