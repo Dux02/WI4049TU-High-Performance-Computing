@@ -245,8 +245,16 @@ void parse_args(int argc, char **argv, Params *p)
     {
         error_and_exit("Maximum iteration count must be at least 1.");  
     }
-    p->dx = 1.0 / (double)(p->nx);     // note the periodic BC
-    p->dy = 1.0 / (double)(p->ny - 1); // for ny=2, only the Dirichlet points exist
+    /* nx includes two periodic ghost columns.
+    ny includes the two physical Dirichlet boundary rows. */
+    if (p->nx < 4 || p->ny < 3)
+    {
+        error_and_exit("Need nx >= 4 and ny >= 3.");
+    }
+
+    p->dx = 1.0 / (double)(p->nx - 2);
+    p->dy = 1.0 / (double)(p->ny - 1);
+
 }
 
 /* function that prints an error message and exits */
