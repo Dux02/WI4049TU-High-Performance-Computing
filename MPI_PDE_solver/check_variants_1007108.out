@@ -1,0 +1,208 @@
+=== standard Grid=64x65 P=1 ===
+Status: CONVERGED
+Iterations: 16792
+Final Change: 9.9962e-11
+Wall Flux Balance         | -2.4541668016e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766939e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749057e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566292e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_1d Grid=64x65 P=1 ===
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Wall Flux Balance         | -2.4541666597e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766890e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749071e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566294e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_1d Grid=64x65 P=2 ===
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Wall Flux Balance         | -2.4541666597e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766890e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749071e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566294e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_1d Grid=64x65 P=4 ===
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Wall Flux Balance         | -2.4541666597e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766890e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749071e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566294e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_2d Grid=64x65 P=1 ===
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Wall Flux Balance         | -2.4541666597e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766890e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749071e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566294e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_2d Grid=64x65 P=2 ===
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Wall Flux Balance         | -2.4541666597e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766890e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749071e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566294e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_2d Grid=64x65 P=4 ===
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676e-11
+Wall Flux Balance         | -2.4541666597e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766890e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749071e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566294e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_overlap Grid=64x65 P=1 ===
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676081761e-11
+Wall Flux Balance         | -2.4541666597e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766890e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749071e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566294e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_overlap Grid=64x65 P=2 ===
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676081761e-11
+Wall Flux Balance         | -2.4541666597e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766890e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749071e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566294e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_overlap Grid=64x65 P=4 ===
+Status: CONVERGED
+Iterations: 1960
+Final Change: 9.9676081761e-11
+Wall Flux Balance         | -2.4541666597e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766890e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749071e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566294e-01   | H1 semi-norm; converges to continuous value                 
+=== standard Grid=66x68 P=1 ===
+Status: CONVERGED
+Iterations: 18153
+Final Change: 9.9990e-11
+Wall Flux Balance         | -2.3442954280e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872069e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028450e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318602e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_1d Grid=66x68 P=1 ===
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_1d Grid=66x68 P=2 ===
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_1d Grid=66x68 P=4 ===
+Status: CONVERGED
+Iterations: 2123
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Final Change: 9.9514e-11
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_2d Grid=66x68 P=1 ===
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_2d Grid=66x68 P=2 ===
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_2d Grid=66x68 P=4 ===
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_overlap Grid=66x68 P=1 ===
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9513854121e-11
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_overlap Grid=66x68 P=2 ===
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9513854121e-11
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 
+=== sor_overlap Grid=66x68 P=4 ===
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9513854121e-11
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 

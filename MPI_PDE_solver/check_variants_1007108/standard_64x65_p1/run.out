@@ -1,0 +1,22 @@
+=== 2D Convection-Diffusion Solver ===
+Grid: 64 x 65 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-10
+TIMING,1,64,65,1.000000,16792,0.519153252
+
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 16792
+Final Change: 9.9962e-11
+Execution Time: 0.519153 seconds
+
+========================================================================================================================
+                                              CANARY VALIDATION REPORT                                                  
+========================================================================================================================
+Integral Quantity         | Computed Value     | Expected Behavior / Usage                                   
+--------------------------+--------------------+------------------------------------------------------------------------
+Wall Flux Balance         | -2.4541668016e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.6234766939e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7649749057e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9926566292e-01   | H1 semi-norm; converges to continuous value                 
+========================================================================================================================
+
+Output images saved to 'rhs.pgm' and 'solution.pgm'.

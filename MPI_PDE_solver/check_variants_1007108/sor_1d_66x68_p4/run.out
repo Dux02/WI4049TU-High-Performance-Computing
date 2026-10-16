@@ -1,0 +1,56 @@
+Rank 1: owns global rows 18 to 34 (17 rows)
+Rank 2: owns global rows 35 to 50 (16 rows)
+Rank 3: owns global rows 51 to 66 (16 rows)
+Rank 0: owns global rows 1 to 17 (17 rows)
+Sum of ranks: 6 (expected 6)
+=== 2D Convection-Diffusion Solver ===
+Grid: 66 x 68 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-10
+=== 2D Convection-Diffusion Solver ===
+Grid: 66 x 68 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-10
+=== 2D Convection-Diffusion Solver ===
+Grid: 66 x 68 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-10
+Rank 0: bottom ghost = 0, top ghost = 0
+=== 2D Convection-Diffusion Solver ===
+Grid: 66 x 68 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-10
+Rank 1: bottom ghost = 0, top ghost = 0
+Rank 2: bottom ghost = 0, top ghost = 0
+Rank 3: bottom ghost = 0, top ghost = 0
+
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 2123
+
+TIMING,4,66,68,1.800000,2123,0.023111693
+
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Execution Time: 0.023106 seconds
+Final Change: 9.9514e-11
+Execution Time: 0.023112 seconds
+
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Execution Time: 0.023107 seconds
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9514e-11
+Execution Time: 0.023104 seconds
+
+========================================================================================================================
+                                              CANARY VALIDATION REPORT                                                  
+========================================================================================================================
+Integral Quantity         | Computed Value     | Expected Behavior / Usage                                   
+--------------------------+--------------------+------------------------------------------------------------------------
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 
+========================================================================================================================
+
+SOR beta: 1.80
+Output images saved to 'rhs.pgm' and 'solutions.pgm'.
