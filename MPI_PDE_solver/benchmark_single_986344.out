@@ -52,3 +52,41 @@ Sum of ranks: 0 (expected 0)
 === 2D Convection-Diffusion Solver ===
 Grid: 4096 x 4097 | cx: 2.00 | cy: 1.00 | Tol: 0.0e+00
 Rank 0: allocated nx=4096 ny=4097; first owned point=(1,1)
+
+--- Solver Results ---
+Status: MAX ITERS REACHED
+Iterations: 1000
+Final Change: 6.9525741170e+00
+Execution Time: 155.270512274 seconds
+Performance: 1.727558 GFLOP/s
+BENCH,1,4096,4097,1.800000,1000,155.270512274,1.727558
+Repeat=2
+Rank 0: coords=(0,0), x=1..4094, y=1..4095
+Rank 0: below=-1 above=-1 left=0 right=0
+Sum of ranks: 0 (expected 0)
+=== 2D Convection-Diffusion Solver ===
+Grid: 4096 x 4097 | cx: 2.00 | cy: 1.00 | Tol: 0.0e+00
+Rank 0: allocated nx=4096 ny=4097; first owned point=(1,1)
+
+--- Solver Results ---
+Status: MAX ITERS REACHED
+Iterations: 1000
+Final Change: 6.9525741170e+00
+Execution Time: 154.817109910 seconds
+Performance: 1.732618 GFLOP/s
+BENCH,1,4096,4097,1.800000,1000,154.817109910,1.732618
+Repeat=3
+Rank 0: coords=(0,0), x=1..4094, y=1..4095
+Rank 0: below=-1 above=-1 left=0 right=0
+Sum of ranks: 0 (expected 0)
+=== 2D Convection-Diffusion Solver ===
+Grid: 4096 x 4097 | cx: 2.00 | cy: 1.00 | Tol: 0.0e+00
+Rank 0: allocated nx=4096 ny=4097; first owned point=(1,1)
+
+--- Solver Results ---
+Status: MAX ITERS REACHED
+Iterations: 1000
+Final Change: 6.9525741170e+00
+Execution Time: 156.774531475 seconds
+Performance: 1.710985 GFLOP/s
+BENCH,1,4096,4097,1.800000,1000,156.774531475,1.710985
