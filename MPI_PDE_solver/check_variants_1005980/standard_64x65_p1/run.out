@@ -1,0 +1,1 @@
+Usage: /home/dabouwer/WI4049TU-High-Performance-Computing/MPI_PDE_solver/bin/standard [-x nx] [-y ny] [-c cx] [-d cy] [-t tolerance]

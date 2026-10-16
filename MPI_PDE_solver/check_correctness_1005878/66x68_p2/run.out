@@ -1,0 +1,33 @@
+Rank 0: coords=(0,0), x=1..64, y=1..33
+Rank 0: below=-1 above=1 left=0 right=0
+Rank 1: coords=(1,0), x=1..64, y=34..66
+Rank 1: below=0 above=-1 left=1 right=1
+Sum of ranks: 1 (expected 1)
+=== 2D Convection-Diffusion Solver ===
+=== 2D Convection-Diffusion Solver ===
+Grid: 66 x 68 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-10
+Grid: 66 x 68 | cx: 2.00 | cy: 1.00 | Tol: 1.0e-10
+Rank 0: allocated nx=66 ny=35; first owned point=(1,1)
+Rank 1: allocated nx=66 ny=35; first owned point=(1,34)
+
+--- Solver Results ---
+Status: CONVERGED
+Iterations: 2123
+Final Change: 9.9513854121e-11
+Execution Time: 0.037409068 seconds
+Performance: 3.835456 GFLOP/s
+BENCH,2,66,68,1.800000,2123,0.037409068,3.835456
+
+========================================================================================================================
+                                              CANARY VALIDATION REPORT                                                  
+========================================================================================================================
+Integral Quantity         | Computed Value     | Expected Behavior / Usage                                   
+--------------------------+--------------------+------------------------------------------------------------------------
+Wall Flux Balance         | -2.3442952860e-03  | Mass balance error; converges to 0 at O(h)                  
+Global Energy Balance     | -1.5336872020e-03  | Energy balance error; converges to 0 at O(h)                
+L2 Norm                   | 3.7662028463e-02   | L2 norm of u; converges to continuous value                 
+H1 Semi-Norm              | 1.9948318604e-01   | H1 semi-norm; converges to continuous value                 
+========================================================================================================================
+
+SOR beta: 1.80
+Output images saved to 'rhs.pgm' and 'solutions.pgm'.
